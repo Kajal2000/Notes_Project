@@ -41,4 +41,23 @@ app.delete("/del_Api/:Notes_id",(req,res)=>{
     })
 })
 
+app.get("/get_Api",(req,res)=>{
+    appDB.get_data()
+        .then((s_data)=>{
+            res.send(s_data)
+        }).catch((err)=>{ 
+            console.log(err)
+    })
+})
+
+app.get("/Api/:Notes_id",(req,res)=>{
+    let Notes_id = req.params.Notes_id
+    appDB.getby_id(Notes_id)
+        .then((s_data)=>{
+            res.send(s_data)
+        }).catch((err)=>{ 
+            console.log(err)
+    })
+})
+
 module.exports = app;
