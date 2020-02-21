@@ -20,10 +20,17 @@ let del_data = (Notes_id) => {
 let get_data = ()=>{
     return knex.select("*")
     .from("Notes")
-}
+};
 //get_id_by data
 let getby_id = (Notes_id)=>{
     return knex.select("*").from("Notes")
     .where("Notes.Notes_id",Notes_id)
-}
-module.exports = {insert_data,update_data,del_data,get_data,getby_id}
+};
+// 
+let search_data = (search) => {
+    return knex.select("*")
+    .from('Notes')
+    .where('Tasks','like',  '%' + search + '%')
+};
+
+module.exports = {insert_data,update_data,del_data,get_data,getby_id,search_data}

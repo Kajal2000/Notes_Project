@@ -2,6 +2,7 @@ const express = require('express');
 const app = express.Router();
 const appDB  = require("../model/notesDB")
 
+// post data
 app.post("/api",(req,res)=>{
     data = {
         Notes_id : req.body.Notes_id,
@@ -16,6 +17,7 @@ app.post("/api",(req,res)=>{
         })
     })
 
+    // update data
 app.put("/Api/:Notes_id",(req,res)=>{
     let Notes_id = req.params.Notes_id
     let data = {
@@ -31,6 +33,7 @@ app.put("/Api/:Notes_id",(req,res)=>{
     })
 })
 
+// delete data
 app.delete("/del_Api/:Notes_id",(req,res)=>{
     let Notes_id = req.params.Notes_id
     appDB.del_data(Notes_id)
@@ -41,6 +44,7 @@ app.delete("/del_Api/:Notes_id",(req,res)=>{
     })
 })
 
+// get alldata
 app.get("/get_Api",(req,res)=>{
     appDB.get_data()
         .then((s_data)=>{
@@ -50,6 +54,7 @@ app.get("/get_Api",(req,res)=>{
     })
 })
 
+// Id by get data
 app.get("/Api/:Notes_id",(req,res)=>{
     let Notes_id = req.params.Notes_id
     appDB.getby_id(Notes_id)
@@ -59,5 +64,15 @@ app.get("/Api/:Notes_id",(req,res)=>{
             console.log(err)
     })
 })
+// get by name 
+app.get("/get/:search",(req,res)=>{
+    var search = req.params.search
+    appDB.search_data(search)
+    .then((data)=>{
+        res.send(data)
+    }).catch((err)=>{ 
+        console.log(err)
+    })
+});
 
 module.exports = app;
