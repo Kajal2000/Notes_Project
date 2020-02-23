@@ -2,7 +2,7 @@ let knex = require('../connection.js')
 
 // post data
 let insert_data = (data) => {
-    return knex("Notes").insert(data)
+    return knex("user_Notes").insert(data)
 }
 
 // update data
@@ -16,11 +16,7 @@ let del_data = (Notes_id) => {
     .where("Notes.Notes_id",Notes_id)
     .del()
 }
-// get all data
-let get_data = ()=>{
-    return knex.select("*")
-    .from("Notes")
-};
+
 //get_id_by data
 let getby_id = (Notes_id)=>{
     return knex.select("*").from("Notes")
@@ -32,5 +28,16 @@ let search_data = (search) => {
     .from('Notes')
     .where('Tasks','like',  '%' + search + '%')
 };
+// get all data with reminder
 
-module.exports = {insert_data,update_data,del_data,get_data,getby_id,search_data}
+let get_all_data = () => {
+    return knex.select("Notes")
+    .join("user_Notes" ,"Notes.Notes_id" , "=" ,"user_Notes.id")
+    .select("Notes.Notes_id","Tasks","Notes","user_Notes.id","Captions","Attachment")
+};
+
+module.exports = {insert_data,update_data,
+    del_data,
+    getby_id,
+    search_data,
+    get_all_data}
