@@ -31,12 +31,13 @@ let search_data = (search) => {
 // get all data with reminder
 
 let get_all_data = () => {
-    return knex.select("Notes")
-    .join("user_Notes" ,"Notes.Notes_id" , "=" ,"user_Notes.id")
+    return knex.select("*").from('Notes')
+    .join("user_Notes" ,"Notes.Notes_id","user_Notes.id")
     .select("Notes.Notes_id","Tasks","Notes","user_Notes.id","Captions","Attachment")
 };
 
-module.exports = {insert_data,update_data,
+module.exports = {insert_data,
+    update_data,
     del_data,
     getby_id,
     search_data,

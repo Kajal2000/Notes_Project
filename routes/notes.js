@@ -69,26 +69,29 @@ app.get("/get/:search", (req, res) => {
 app.get("/get_Api", (req, res) => {
     appDB.get_data()
     .then((data) => {
-        var list = []
-        for (var y = 0; y < data.length; y++) {
-            let task = data[y]["Tasks"]
-            list.push(task)
-            }
-            setTimeout(function loop() {
-                console.log(list.shift());
-                if (list.length)
-                    setTimeout(loop, 5000);
-            }, 5000);
+        // var list = []
+        // for (var y = 0; y < data.length; y++) {
+        //     let task = data[y]["Tasks"]
+        //     list.push(task)
+        //     }
+            // setTimeout(function loop() {
+            //     console.log(list.shift());
+            //     if (list.length)
+            //         setTimeout(loop, 5000);
+            // }, 5000);
     })
 })
 
 app.get("/getapi", (req, res) => {
     appDB.get_all_data()
-        .then((r_data) => {
-            res.send(r_data)
-        }).catch((err) => {
-            console.log(err)
-        })
+    .then((r_data) => {
+        // console.log(r_data)
+        setTimeout(function loop() {
+            console.log(r_data.shift());
+            if (r_data.length)
+                setTimeout(loop, 8000);
+        }, 5000)
+    })
 });
 
 module.exports = app;
