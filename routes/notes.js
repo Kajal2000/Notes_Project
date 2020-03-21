@@ -3,20 +3,20 @@ const app = express.Router();
 const appDB = require("../model/notesDB");
 
 // post data
+
 app.post("/api", (req, res) => {
-    data = {
-        id: req.body.id,
-        Captions: req.body.Captions,
-        Attachment: req.body.Attachment
+    var data = {
+        Notes_id : req.body.Notes_id,
+        Tasks : req.body.Tasks,
+        Notes : req.body.Notes
     }
-    appDB.insert_data(data)
+    appDB.insert(data)
         .then((s_data) => {
             res.send(s_data)
         }).catch((err) => {
             console.log(err)
         })
 })
-
 // update data
 app.put("/Api/:Notes_id", (req, res) => {
     let Notes_id = req.params.Notes_id
@@ -65,21 +65,19 @@ app.get("/get/:search", (req, res) => {
         })
 });
 
-// get alldata
-app.get("/get_Api", (req, res) => {
-    appDB.get_data()
-    .then((data) => {
-        // var list = []
-        // for (var y = 0; y < data.length; y++) {
-        //     let task = data[y]["Tasks"]
-        //     list.push(task)
-        //     }
-            // setTimeout(function loop() {
-            //     console.log(list.shift());
-            //     if (list.length)
-            //         setTimeout(loop, 5000);
-            // }, 5000);
-    })
+// post data for Attachment
+app.post("/api", (req, res) => {
+    data = {
+        id: req.body.id,
+        Captions: req.body.Captions,
+        Attachment: req.body.Attachment
+    }
+    appDB.insert_data(data)
+        .then((s_data) => {
+            res.send(s_data)
+        }).catch((err) => {
+            console.log(err)
+        })
 })
 
 app.get("/getapi", (req, res) => {

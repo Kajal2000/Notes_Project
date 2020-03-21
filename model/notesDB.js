@@ -1,8 +1,8 @@
 let knex = require('../connection.js')
 
 // post data
-let insert_data = (data) => {
-    return knex("user_Notes").insert(data)
+let insert = (data) => {
+    return knex("Notes").insert(data)
 }
 
 // update data
@@ -28,6 +28,13 @@ let search_data = (search) => {
     .from('Notes')
     .where('Tasks','like',  '%' + search + '%')
 };
+
+// post data for Attachment
+
+let insert_data = (data) => {
+    return knex("user_Notes").insert(data)
+}
+
 // get all data with reminder
 
 let get_all_data = () => {
@@ -36,7 +43,7 @@ let get_all_data = () => {
     .select("Notes.Notes_id","Tasks","Notes","user_Notes.id","Captions","Attachment")
 };
 
-module.exports = {insert_data,
+module.exports = {insert,insert_data,
     update_data,
     del_data,
     getby_id,
