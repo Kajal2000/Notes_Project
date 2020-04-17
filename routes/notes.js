@@ -1,5 +1,5 @@
 const express = require('express');
-const app = express.Router();
+const app = express();
 const appDB = require("../model/notesDB");
 
 // post data
