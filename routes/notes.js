@@ -83,13 +83,22 @@ app.post("/api", (req, res) => {
 app.get("/getapi", (req, res) => {
     appDB.get_all_data()
     .then((r_data) => {
-        // console.log(r_data)
-        setTimeout(function loop() {
-            console.log(r_data.shift());
-            if (r_data.length)
-                setTimeout(loop, 8000);
-        }, 5000)
+        setTimeout(function () {
+            console.log(r_data)
+          }, 5000)
     })
 });
+
+// app.get("/getapi", (req, res) => {
+//     appDB.get_all_data()
+//     .then((r_data) => {
+//         // console.log(r_data)
+//         setTimeout(function loop() {
+//             console.log(r_data.shift());
+//             if (r_data.length)
+//                 setTimeout(loop, 8000);
+//         }, 5000)
+//     })
+// });
 
 module.exports = app;
