@@ -80,14 +80,17 @@ app.post("/api", (req, res) => {
         })
 })
 
+
 app.get("/getapi", (req, res) => {
+    var readlineSync = require('readline-sync');
+    var userName = readlineSync.question('enter your time sec :) ');
+    var userInput = parseInt(userName)
     appDB.get_all_data()
     .then((r_data) => {
         setTimeout(function () {
             console.log(r_data)
-          }, 5000)
+        }, userInput)
     })
 });
-
 
 module.exports = app;
